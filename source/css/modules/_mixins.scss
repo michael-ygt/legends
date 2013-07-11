@@ -1,0 +1,58 @@
+/**
+ * Zoom-in effect
+ *
+ * Adapted from middlemanapp.com default template
+ */
+$prefixes: ("-webkit-","-moz-", "-ms-", "-o-", "");
+
+@mixin keyframes($name) {
+	// @each $prefix in $prefixes {
+	// 	@#{$prefix}keyframes #{$name} {
+	// 		@content;
+	// 	}
+	// }
+
+	@-webkit-keyframes $name {
+		@content;
+	}
+	@-moz-keyframes $name {
+		@content;
+	}
+	@-ms-keyframes $name {
+		@content;
+	}
+	@-o-keyframes $name {
+		@content;
+	}
+	@keyframes $name {
+		@content;
+	}
+}
+
+@include keyframes(zoom-in) {
+	@each $prefix in webkit moz ms o {
+		from {
+			-#{$prefix}-transform: scale(0);
+			opacity: 0;
+		}
+		50% {
+			-#{$prefix}-transform: scale(0);
+			opacity: 0;
+		}
+		82.5% {
+			-#{$prefix}-transform: scale(1.03);
+			-#{$prefix}-animation-timing-function: ease-out;
+			opacity: 1;
+		}
+		to {
+			-#{$prefix}-transform: scale(1);
+		}
+	}
+}
+
+@mixin animate-zoom-in() {
+	@each $prefix in webkit moz ms o {
+		-#{$prefix}-animation-name: zoom-in;
+		-#{$prefix}-animation-duration:.9s;
+	}
+}
