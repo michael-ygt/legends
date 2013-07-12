@@ -6,9 +6,9 @@
 # First: gem install susy --pre
 # require 'susy'
 
-# Change Compass configuration
+ # Change Compass configuration
 # compass_config do |config|
-# 	config.output_style = :compact
+# 	config.output_style = :compressed
 # 	config.sass_options = {:debug_info => true}
 # end
 
@@ -65,6 +65,7 @@ end
 set :css_dir, 'css'
 set :js_dir, 'js'
 set :images_dir, 'img'
+set :partials_dir, 'partials'
 
 activate :directory_indexes
 

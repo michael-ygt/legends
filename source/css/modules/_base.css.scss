@@ -3,35 +3,35 @@
 // 	text-align: center;
 // 	font-family: sans-serif; }
 
-h1 {
-	// color: rgba(0, 0, 0, .3);
-	font-weight: bold;
-	font-size: 32px;
-	letter-spacing: -1px;
-	text-transform: uppercase;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
-	background: url("../img/middleman.png") no-repeat center 100px;
-	padding: 350px 0 10px;
-	margin: 0; }
+// h1 {
+// 	// color: rgba(0, 0, 0, .3);
+// 	font-weight: bold;
+// 	font-size: 32px;
+// 	letter-spacing: -1px;
+// 	text-transform: uppercase;
+// 	text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+// 	background: url("../img/middleman.png") no-repeat center 100px;
+// 	padding: 350px 0 10px;
+// 	margin: 0; }
 
-.doc {
-	font-size: 14px;
-	margin: 0; }
-	.doc:before,
-	.doc:after {
-		opacity: .2;
-		padding: 6px;
-		font-style: normal;
-		position: relative;
-		content: "•"; }
-	.doc a {
-		color: rgba(0, 0, 0, 0.3); }
-		.doc a:hover {
-			color: #666; }
+// .doc {
+// 	font-size: 14px;
+// 	margin: 0; }
+// 	.doc:before,
+// 	.doc:after {
+// 		opacity: .2;
+// 		padding: 6px;
+// 		font-style: normal;
+// 		position: relative;
+// 		content: "•"; }
+// 	.doc a {
+// 		color: rgba(0, 0, 0, 0.3); }
+// 		.doc a:hover {
+// 			color: #666; }
 
-.welcome {
-	-webkit-animation-name: blah;
-	-webkit-animation-duration: .9s; }
+// .welcome {
+// 	-webkit-animation-name: blah;
+// 	-webkit-animation-duration: .9s; }
 
 // @-webkit-keyframes blah {
 // 	from {
@@ -73,10 +73,12 @@ h1 {
 body {
 	font-family: "Open Sans", sans-serif;
 	color: #fff;
-	background: url('../img/bg-legends.jpg') no-repeat fixed center center / cover;
+	background: url('../img/bg-body.jpg') no-repeat fixed center center;
+	background-size: cover;
 }
 
 a {
+	color: #fff;
 	text-decoration: none;
 
 		&:visited {
@@ -98,6 +100,12 @@ h6 {
 	letter-spacing: 1px;
 }
 
+h1, h2 {
+	font-weight: normal;
+	line-height: 1.2;
+	text-shadow: 1px 1px 5px #333;
+}
+
 
 .container {
 	width: 960px;
@@ -106,38 +114,6 @@ h6 {
 
 #site-header {
 	//@extend .cf;
-}
-
-#main-nav {
-	background: rgb(50, 42, 41); // IE8 fallback
-	background: rgba(50, 42, 41, 0.85);
-	padding: 0;
-
-	// > li {
-	//   @media only screen and (max-width: 700px) {
-	//     display: list-item;
-	//   }
-	//   > a {
-	//   	display: block;
-	//   }
-	// }
-}
-
-
-/**
- * Force equal widths for li elements in nav
- * http://stackoverflow.com/questions/10525744/css-table-cell-equal-width
- */
-.nav--fit {
-	table-layout: fixed;
-
-	&> li {
-		width: 100%;
-
-		&> a {
-			display: inline-block; // Prevent anchor from filling li
-		}
-	}
 }
 
 .logo {
@@ -149,7 +125,8 @@ h6 {
 	// @include animate-zoom-in;
 
 	-webkit-animation-name: welcome;
-	-webkit-animation-duration: .9s; }
+	-webkit-animation-duration: .9s;
+}
 
 @-webkit-keyframes welcome {
 	from {
@@ -170,13 +147,97 @@ h6 {
 	}
 }
 
+#main-nav {
+	background: rgb(50, 42, 41); // IE8 fallback
+	background: rgba(50, 42, 41, 0.85);
+
+	// > li {
+	//   @media only screen and (max-width: 700px) {
+	//     display: list-item;
+	//   }
+	//   > a {
+	//   	display: block;
+	//   }
+	// }
+	> ul {
+		margin: 0;
+	}
+}
+
+
+/**
+ * Force equal widths for li elements in nav
+ * http://stackoverflow.com/questions/10525744/css-table-cell-equal-width
+ */
+.nav--fit {
+	table-layout: fixed;
+
+	&> li {
+		width: 100%;
+
+		&> a {
+			display: inline-block; // Prevent anchor from filling li
+		}
+	}
+}
+
+/**
+ * Address inline-block whitespace issue in _grid.scss without littering markup
+ * empty with comments
+ * https://github.com/csswizardry/inuit.css/issues/194
+ */
+.grid {
+	font-size: 0;
+	> * {font-size: $base-font-size;}
+	.grid {font-size: 0;}
+}
+
+.grid--main {
+	margin-left: 0;
+	padding: 0 60px;
+}
+
+.grid__item {
+	padding-left: 0; // We're using our own padding on .grid--main instead
+}
+
+.flexbox__item {
+	vertical-align: top;
+}
+
+.page-banner {
+	background: rgb(58, 46, 33) url('../img/bg-home.png') no-repeat top left; // IE8 fallback
+	background: rgba(58, 46, 33, 0.55) url('../img/bg-home.png') no-repeat top left;
+}
+
+.page-title {
+	margin-top: 20px;
+	margin-bottom: 0;
+	height: 310px; // Height of .page-banner bg image
+}
+
+.feature {
+	text-align: center;
+	padding: 0 20px;
+	border-right: 1px solid rgba(255,255,255,0.3);
+
+	&.last {
+		border-right: none;
+	}
+}
+
+.section-title {
+	@extend .gamma;
+}
+
 footer {
 	height: 244px;
-	background: url('../img/bg-footer.png') no-repeat bottom center;
+	background: rgba(58, 46, 33, 0.55) url('../img/bg-footer.png') no-repeat bottom center;
 	padding: 100px 60px 0;
 }
 
 .footer-title {
+	@extend .delta;
 	font-weight: normal;
 	border-bottom: 1px solid;
 }
@@ -191,10 +252,99 @@ footer {
 // .top-bar-section ul li {display: table-cell; float: none; text-align: center;}
 
 
+.btn {
+	border-radius: 4px;
+	background-color: #fff;
+	color: rgb(50, 42, 41);
+	font-weight: bold;
+	font-size: 0.8em;
+	font-family: "Cinzel", serif;
+	padding: 5px 7px;
+	text-transform: uppercase;
+	position: relative;
+
+		&:visited {
+			color: rgb(50, 42, 41); 
+		}
+}
+
+.btn:after {
+	content: "";
+  display: block;
+	border-radius: 4px;
+	border: 1px solid rgb(50, 42, 41);
+	position: absolute;
+	top: 0; 
+	left: 0;
+	right: 0;
+	bottom: 0;
+  margin: 2px;
+
+}
+
+// .btn:before {
+// 	content: "";
+// 	border: 1px solid #fff;
+// 	position: absolute;
+// }
+
+// .btn:after {
+// 	content: "";
+// 	position: absolute;
+// 	border: 1px solid rgb(50, 42, 41);
+// 	top: 1px; left: 1px;	right: 1px; bottom: 1px;
+// }
 
 
+// @font-face {
+//   font-family: 'fontello';
+//   src: url('../font/fontello.eot?46925654');
+//   src: url('../font/fontello.eot?46925654#iefix') format('embedded-opentype'),
+//        url('../font/fontello.woff?46925654') format('woff'),
+//        url('../font/fontello.ttf?46925654') format('truetype'),
+//        url('../font/fontello.svg?46925654#fontello') format('svg');
+//   font-weight: normal;
+//   font-style: normal;
+// }
 
-
+//  [class^="icon-"]:before, [class*=" icon-"]:before {
+//   font-family: "fontello";
+//   font-style: normal;
+//   font-weight: normal;
+//   speak: none;
+ 
+//   display: inline-block;
+//   text-decoration: inherit;
+//   width: 1em;
+//   margin-right: .2em;
+//   text-align: center;
+//   /* opacity: .8; */
+ 
+//   /* For safety - reset parent styles, that can break glyph codes*/
+//   font-variant: normal;
+//   text-transform: none;
+     
+//   /* fix buttons height, for twitter bootstrap */
+//   line-height: 1em;
+ 
+//   /* Animation center compensation - margins should be symmetric */
+//   /* remove if not needed */
+//   margin-left: .2em;
+ 
+//   /* you can be more comfortable with increased icons size */
+//   /* font-size: 120%; */
+ 
+//   /* Uncomment for 3D effect */
+//   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+// }
+ 
+// .icon-right-thin:before { content: '\e801'; } /* '' */
+// .icon-right:before { content: '\e804'; } /* '' */
+// .icon-right-1:before { content: '\e806'; } /* '' */
+// .icon-right-open:before { content: '\e805'; } /* '' */
+// .icon-right-circle:before { content: '\e803'; } /* '' */
+// .icon-right-bold:before { content: '\e802'; } /* '' */
+// .icon-left:before { content: '\e800'; } /* '' */
 
 
 
