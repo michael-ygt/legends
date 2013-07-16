@@ -48,28 +48,25 @@ h6 {
 	width: 310px;
 	margin: 0 auto;
 
-	// @include animate-zoom-in;
-
-	-webkit-animation-name: welcome;
-	-webkit-animation-duration: .9s;
+	@include vendor(animation, zoom-in .9s);
 }
 
-@-webkit-keyframes welcome {
+@include keyframe(zoom-in) {
 	from {
-		-webkit-transform: scale(0);
+		@include vendor(transform, scale(0));
 		opacity: 0;
 	}
 	50% {
-	 -webkit-transform: scale(0);
+		@include vendor(transform, scale(0));
 	 opacity: 0;
 	}
 	82.5% {
-		-webkit-transform: scale(1.03);
-		-webkit-animation-timing-function: ease-out;
+		@include vendor(transform, scale(1.03));
+		@include vendor(animation-timing-function, ease-out);
 		opacity: 1;
 	}
 	to {
-		-webkit-transform: scale(1);
+		@include vendor(transform, scale(1));
 	}
 }
 
@@ -108,22 +105,32 @@ h6 {
 }
 
 .banner {
-	background: rgb(58, 46, 33) url('../img/bg-home.png') no-repeat top left; // IE8 fallback
-	background: rgba(58, 46, 33, 0.65) url('../img/bg-home.png') no-repeat top left;
+	background: rgb(58, 46, 33) url('../img/bnr-home.png') no-repeat top left; // IE8 fallback
+	background: rgba(58, 46, 33, 0.65) url('../img/bnr-home.png') no-repeat top left;
 }
 
 body.event .banner {
-	background: rgb(58, 46, 33) url('../img/bg-event.png') no-repeat top left; // IE8 fallback
-	background: rgba(58, 46, 33, 0.65) url('../img/bg-event.png') no-repeat top left;	
+	background: rgb(58, 46, 33) url('../img/bnr-event.png') no-repeat top left; // IE8 fallback
+	background: rgba(58, 46, 33, 0.65) url('../img/bnr-event.png') no-repeat top left;	
+}
+
+body.venues .banner {
+	background: rgb(58, 46, 33) url('../img/bnr-venues.png') no-repeat top left; // IE8 fallback
+	background: rgba(58, 46, 33, 0.65) url('../img/bnr-venues.png') no-repeat top left;	
 }
 
 .banner--event {
 }
 
+body.contact .banner {
+	background: rgb(58, 46, 33) url('../img/bnr-contact-us.png') no-repeat top left; // IE8 fallback
+	background: rgba(58, 46, 33, 0.65) url('../img/bnr-contact-us.png') no-repeat top left;	
+}
+
 .page-title {
 	margin-top: 20px;
 	margin-bottom: 0;
-	height: 310px; // Height of .page-banner bg image
+	height: 310px; // Height of .banner bg image
 }
 
 /**
@@ -169,7 +176,7 @@ body.event .banner {
 	// position: relative; // FF doesn't respect this b/c it's display: table-cell
 	padding: 0 30px 30px;
 	text-align: center;
-	border-right: 1px solid rgb(255,255,255); // IE8 fallback
+	border-right: 1px solid #fff; // IE8 fallback
 	border-right: 1px solid rgba(255,255,255,0.3);
 
 	&.last {
@@ -225,6 +232,18 @@ body.event .banner {
 	}
 }
 
+.contact-info {
+	dt { 
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+
+	dd {
+		margin-left: 0px;
+	}
+
+}
+
 .activity-info {
 	text-align: left;
 }
@@ -235,7 +254,8 @@ body.event .banner {
 }
 
 .register-box {
-	background-color: rgba(31, 47, 11, 0.75);
+	background: rgb(31, 47, 11); // IE8 fallback
+	background: rgba(31, 47, 11, 0.75);
 	border-radius: 10px;
 	text-align: center;
 	padding: 20px;
@@ -247,7 +267,12 @@ body.event .banner {
 	}
 }
 
-
+.subheading {
+	@extend .delta;
+	font-family: "Cinzel", serif;
+	font-weight: normal;
+	// text-transform: uppercase;
+}
 
 
 
@@ -270,12 +295,6 @@ body.event .banner {
 	@extend .nav, .nav--banner, .nav--fit;
 }
 
-
-// .top-bar-section {width: 100%;}
-// .top-bar-section ul[class!="title-area"] {display: table; margin: 0 auto; width: 100%;}
-// .top-bar-section ul li {display: table-cell; float: none; text-align: center;}
-
-
 .btn {
 	border-radius: 4px;
 	background-color: #fff;
@@ -286,15 +305,16 @@ body.event .banner {
 	padding: 5px 7px;
 	text-transform: uppercase;
 	position: relative;
+	// box-shadow: 0 0 0 1px rgb(50, 42, 41), 0 0 0 2px #fff; // No IE8
 
-		&:visited {
+		&:visited, &:hover, &:active {
 			color: rgb(50, 42, 41); 
 		}
 }
 
 .btn:after {
 	content: "";
-  display: block;
+	display: block;
 	border-radius: 4px;
 	border: 1px solid rgb(50, 42, 41);
 	position: absolute;
@@ -302,8 +322,7 @@ body.event .banner {
 	left: 0;
 	right: 0;
 	bottom: 0;
-  margin: 2px;
-
+	margin: 1px;
 }
 
 // .btn:before {
@@ -347,7 +366,7 @@ body.event .banner {
 //   /* For safety - reset parent styles, that can break glyph codes*/
 //   font-variant: normal;
 //   text-transform: none;
-     
+		 
 //   /* fix buttons height, for twitter bootstrap */
 //   line-height: 1em;
  

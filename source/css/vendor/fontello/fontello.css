@@ -1,10 +1,15 @@
+/**
+ * Moved SVG from bottom to above WOFF to try to fix sporadic rendering issue in
+ * Chrome
+ */
+
 @font-face {
   font-family: 'fontello';
   src: url('../font/fontello.eot?4649275');
   src: url('../font/fontello.eot?4649275#iefix') format('embedded-opentype'),
+       url('../font/fontello.svg?4649275#fontello') format('svg'),
        url('../font/fontello.woff?4649275') format('woff'),
-       url('../font/fontello.ttf?4649275') format('truetype'),
-       url('../font/fontello.svg?4649275#fontello') format('svg');
+       url('../font/fontello.ttf?4649275') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
