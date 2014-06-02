@@ -1,0 +1,460 @@
+body {
+	font-family: "Open Sans", sans-serif;
+	color: #fff;
+	background: url("../img/bg-body.jpg") no-repeat fixed center center;
+	background-size: cover;
+}
+
+a {
+	color: #fff;
+	text-decoration: none;
+	border-bottom: 1px solid #b28b64;
+
+		&:visited {
+			color: #fff;
+		}
+
+		&:hover, &:active {
+			color: #b28b64;
+		}
+}
+
+ul a,
+a[class*="btn"] {
+	border-bottom: none; // Remove border on nav items and buttons
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Cinzel", serif;
+	letter-spacing: 1px;
+	font-weight: normal;
+	line-height: 1.2;
+	text-shadow: 1px 1px 5px #333;
+}
+
+.container {
+	width: 960px;
+	margin: 0 auto;
+}
+
+.logo {
+	background: url('../img/logo-legends.png') no-repeat top left;
+	height: 137px;
+	width: 310px;
+	margin: 0 auto;
+
+	@include vendor(animation, zoom-in .9s);
+}
+
+@include keyframe(zoom-in) {
+	from {
+		@include vendor(transform, scale(0));
+		opacity: 0;
+	}
+	50% {
+		@include vendor(transform, scale(0));
+	 opacity: 0;
+	}
+	82.5% {
+		@include vendor(transform, scale(1.03));
+		@include vendor(animation-timing-function, ease-out);
+		opacity: 1;
+	}
+	to {
+		@include vendor(transform, scale(1));
+	}
+}
+
+#main-nav {
+	background: rgb(50, 42, 41); // IE8 fallback
+	background: rgba(50, 42, 41, 0.85);
+
+	// > li {
+	//   @media only screen and (max-width: 700px) {
+	//     display: list-item;
+	//   }
+	//   > a {
+	//   	display: block;
+	//   }
+	// }
+	> ul {
+		margin: 0;
+	}
+}
+
+
+/**
+ * Force equal widths for li elements in nav
+ * http://stackoverflow.com/questions/10525744/css-table-cell-equal-width
+ */
+.nav--fit {
+	table-layout: fixed;
+
+	&> li {
+		width: 100%;
+
+		&> a {
+			display: inline-block; // Prevent anchor from filling li
+		}
+	}
+}
+
+.banner {
+	background: rgb(58, 46, 33) url('../img/bnr-home.png') no-repeat top left; // IE8 fallback
+	background: rgba(58, 46, 33, 0.65) url('../img/bnr-home.png') no-repeat top left;
+}
+
+body.event .banner {
+	background: rgb(58, 46, 33) url('../img/bnr-event.png') no-repeat top left; // IE8 fallback
+	background: rgba(58, 46, 33, 0.65) url('../img/bnr-event.png') no-repeat top left;	
+}
+
+body.venues .banner {
+	background: rgb(58, 46, 33) url('../img/bnr-venues.png') no-repeat top left; // IE8 fallback
+	background: rgba(58, 46, 33, 0.65) url('../img/bnr-venues.png') no-repeat top left;	
+}
+
+.banner--event {
+}
+
+body.contact .banner {
+	background: rgb(58, 46, 33) url('../img/bnr-contact-us.png') no-repeat top left; // IE8 fallback
+	background: rgba(58, 46, 33, 0.65) url('../img/bnr-contact-us.png') no-repeat top left;	
+}
+
+.page-title {
+	margin-top: 20px;
+	margin-bottom: 0;
+	height: 310px; // Height of .banner bg image
+}
+
+/**
+ * Address inline-block whitespace issue in _grid.scss without littering markup
+ * with empty comments
+ * https://github.com/csswizardry/inuit.css/issues/194
+ */
+.grid {
+	font-size: 0;
+	
+	> * {
+		font-size: $base-font-size;
+	}
+	
+	.grid {
+		font-size: 0;
+	}
+}
+
+.grid--main {
+	@extend .grid;
+	margin-left: 0;
+	padding: 0 60px;
+
+	> .grid__item {
+		padding-left: 0; // We're using our own padding on .grid--main instead
+		margin-bottom: 10px;
+	}
+
+}
+
+// body.event .grid--main {
+// 	@extend .grid--main;
+// 	padding-right: 0;
+// }
+
+.flexbox__item {
+	vertical-align: top; // _flexbox.scss override
+}
+
+.flexbox__item--feature {
+	@extend .flexbox__item;
+	// position: relative; // FF doesn't respect this b/c it's display: table-cell
+	padding: 0 30px 30px;
+	text-align: center;
+	border-right: 1px solid #fff; // IE8 fallback
+	border-right: 1px solid rgba(255,255,255,0.3);
+
+	&.last {
+		border-right: none;
+	}
+
+	.btn {
+		// position: absolute;
+		// left: 0;
+		// right: 0;
+		// bottom: 0;
+		// width: 160px; // Specificity required to prevent button going full-width
+		// margin: 0 auto;
+		// line-height: 1.6;
+	}
+}
+
+.section-title {
+	@extend .gamma;
+	width: 210px; // Specificity required for proper line-break of section titles
+	margin-left: auto; // Auto margins required to maintain center alignment
+	margin-right: auto;
+}
+
+.grid__item--itinerary {
+	@extend .grid__item;
+	// margin-left: 30px;
+	// margin-right: -30px;
+	padding: 30px !important;
+	background: rgb(50, 41, 40); // IE8 fallback
+	background: rgba(50, 41, 40, 0.65);
+	border-radius: 10px;
+	text-align: center;
+}
+
+.itinerary-title {
+	// margin-bottom: 10px;
+	border-bottom: 1px solid;
+	display: inline-block;
+}
+
+.itinerary-list {
+	color: #b28b64;
+	text-align: center;
+
+	dt {
+		font-weight: bold;
+	}
+
+	dd {
+		margin-left: 0;
+		margin-bottom: 20px;
+	}
+}
+
+.contact-info {
+	dt { 
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+
+	dd {
+		margin-left: 0px;
+	}
+
+}
+
+.activity-info {
+	text-align: left;
+}
+
+.activity-list {
+	margin-left: 20px;
+	margin-bottom: 0;
+}
+
+.register-box {
+	background: rgb(31, 47, 11); // IE8 fallback
+	background: rgba(31, 47, 11, 0.75);
+	border-radius: 10px;
+	text-align: center;
+	padding: 20px;
+
+	.register-title {
+		@extend .delta;
+		font-weight: normal;
+		margin-bottom: 10px;
+	}
+}
+
+.subheading {
+	@extend .delta;
+	font-family: "Cinzel", serif;
+	font-weight: normal;
+	// text-transform: uppercase;
+}
+
+
+
+
+
+#site-footer {
+	height: 244px;
+	background: rgb(58, 46, 33) url('../img/bg-footer.png') no-repeat bottom center; // IE8 fallback
+	background: rgba(58, 46, 33, 0.65) url('../img/bg-footer.png') no-repeat bottom center;
+	padding: 100px 60px 0;
+}
+
+.footer-title {
+	@extend .delta;
+	font-weight: normal;
+	border-bottom: 1px solid;
+}
+
+.partners-list {
+	@extend .nav, .nav--banner, .nav--fit;
+}
+
+.btn {
+	border-radius: 4px;
+	background-color: #fff;
+	color: rgb(50, 42, 41);
+	font-weight: bold;
+	font-size: 0.8em;
+	font-family: "Cinzel", serif;
+	padding: 5px 7px;
+	text-transform: uppercase;
+	position: relative;
+	// box-shadow: 0 0 0 1px rgb(50, 42, 41), 0 0 0 2px #fff; // No IE8
+
+		&:visited, &:hover, &:active {
+			color: rgb(50, 42, 41); 
+		}
+}
+
+.btn:after {
+	content: "";
+	display: block;
+	border-radius: 4px;
+	border: 1px solid rgb(50, 42, 41);
+	position: absolute;
+	top: 0; 
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 1px;
+}
+
+// .btn:before {
+// 	content: "";
+// 	border: 1px solid #fff;
+// 	position: absolute;
+// }
+
+// .btn:after {
+// 	content: "";
+// 	position: absolute;
+// 	border: 1px solid rgb(50, 42, 41);
+// 	top: 1px; left: 1px;	right: 1px; bottom: 1px;
+// }
+
+
+// @font-face {
+//   font-family: 'fontello';
+//   src: url('../font/fontello.eot?46925654');
+//   src: url('../font/fontello.eot?46925654#iefix') format('embedded-opentype'),
+//        url('../font/fontello.woff?46925654') format('woff'),
+//        url('../font/fontello.ttf?46925654') format('truetype'),
+//        url('../font/fontello.svg?46925654#fontello') format('svg');
+//   font-weight: normal;
+//   font-style: normal;
+// }
+
+//  [class^="icon-"]:before, [class*=" icon-"]:before {
+//   font-family: "fontello";
+//   font-style: normal;
+//   font-weight: normal;
+//   speak: none;
+ 
+//   display: inline-block;
+//   text-decoration: inherit;
+//   width: 1em;
+//   margin-right: .2em;
+//   text-align: center;
+//   /* opacity: .8; */
+ 
+//   /* For safety - reset parent styles, that can break glyph codes*/
+//   font-variant: normal;
+//   text-transform: none;
+		 
+//   /* fix buttons height, for twitter bootstrap */
+//   line-height: 1em;
+ 
+//   /* Animation center compensation - margins should be symmetric */
+//   /* remove if not needed */
+//   margin-left: .2em;
+ 
+//   /* you can be more comfortable with increased icons size */
+//   /* font-size: 120%; */
+ 
+//   /* Uncomment for 3D effect */
+//   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+// }
+ 
+// .icon-right-thin:before { content: '\e801'; } /* '' */
+// .icon-right:before { content: '\e804'; } /* '' */
+// .icon-right-1:before { content: '\e806'; } /* '' */
+// .icon-right-open:before { content: '\e805'; } /* '' */
+// .icon-right-circle:before { content: '\e803'; } /* '' */
+// .icon-right-bold:before { content: '\e802'; } /* '' */
+// .icon-left:before { content: '\e800'; } /* '' */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+	 Helper classes
+	 ========================================================================== */
+
+.chromeframe {
+		margin: 0.2em 0;
+		background: #ccc;
+		color: #000;
+		padding: 0.2em 0;
+}
+
+.ir {
+		background-color: transparent;
+		border: 0;
+		overflow: hidden;
+		*text-indent: -9999px;
+}
+
+.ir:before {
+		content: "";
+		display: block;
+		width: 0;
+		height: 150%;
+}
+
+.hidden {
+		display: none !important;
+		visibility: hidden;
+}
+
+.visuallyhidden {
+		border: 0;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+}
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+		clip: auto;
+		height: auto;
+		margin: 0;
+		overflow: visible;
+		position: static;
+		width: auto;
+}
+
+.invisible {
+		visibility: hidden;
+}
